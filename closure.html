@@ -1,0 +1,37 @@
+<div class="user-list"></div>
+<script src="./jquery-3.7.0.min.js"></script>
+<script src="./underscore-umd-min.js"></script>
+<script>
+    var users = [
+        { name: "John", age: 25 },
+        { name: "Pete", age: 30 },
+        { name: "Mary", age: 28 }
+    ];
+
+    $('.user-list').append(
+        _.map(users, function(user) {
+            var button = $('<button>').text(user.name);
+            button.click(function() {
+                if (confirm(user.name + "님을 팔로잉 하시겠습니까?")) follow(user);
+            });
+            return button;
+    }));
+
+    // 흔한 클로저 실수
+    var buttons = [];
+    for (var i=0; i<users.length;i++){
+        var user = users[i];
+        buttons.push($('<button>').text(user.name).click(function() {
+            console.log(user.name);
+        }))
+    }
+    $('.user-list').append(buttons);
+
+
+
+    function follow(user) {
+        $.post('/follow', {user_id: user.id }, function() {
+            alert("이제 " + user.name + "님의 소식을 보실 수 있습니다.");
+        })
+    }
+</script>

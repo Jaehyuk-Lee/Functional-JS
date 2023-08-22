@@ -21,11 +21,11 @@ function beq(a) {
         return a === b;
     }
 }
-console.time(1);
+console.time("1");
 for (var i = 0; i < 10000; i++) {
     _.every([0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5]);
 }
-console.timeEnd(1);
+console.timeEnd("1");
 
 _.some = function(list) {
     return !!_.find(list, _.identity);
@@ -35,11 +35,11 @@ var every2 = function(list) {
     return beq(-1)(_.findIndex(list, not));
 };
 
-console.time(2);
+console.time("2");
 for (var i = 0; i < 10000; i++) {
     every2([0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5, 0, null, 2, 5]);
 }
-console.timeEnd(2);
+console.timeEnd("2");
 
 function positive(list) {
     return _.find(list, _.identity);
