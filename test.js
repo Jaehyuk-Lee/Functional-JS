@@ -64,3 +64,14 @@ function add5(a) {
 function add10(a) {
     return a + 10;
 }
+
+function flatten(arr) {
+    return function f(arr, new_arr) {
+        arr.forEach(function(v) {
+            Array.isArray(v) ? f(v, new_arr) : new_arr.push(v);
+        });
+        return new_arr;
+    }(arr, []);
+}
+
+console.log(flatten([1, 2, [3, 4, [5, 6], 7], 8]));

@@ -1,4 +1,5 @@
-var _ = require('underscore');
+const _ = require('underscore');
+import { RecursiveNumberArray } from './d';
 
 let a = 10;
 // console.log(_.identity(a));
@@ -64,3 +65,21 @@ function add5(a) {
 function add10(a) {
     return a + 10;
 }
+
+function f1() {
+    return function() {
+
+    }
+}
+f1();
+
+function flatten(arr: RecursiveNumberArray) {
+    return function f(arr: RecursiveNumberArray, new_arr: RecursiveNumberArray) {
+        arr.forEach(function(v) {
+            Array.isArray(v) ? f(v, new_arr) : new_arr.push(v);
+        });
+        return new_arr;
+    }(arr, []);
+}
+
+console.log(flatten([1, 2, [3, 4, [5, 6], 7], 8]));
